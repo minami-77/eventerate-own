@@ -1,0 +1,140 @@
+.simple-calendar {
+  height: 552px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    border: 1px solid #ddd;
+  }
+
+  .calendar-heading {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    color: #ffffff;
+    background: linear-gradient(90deg, #740478, #862ee5); // Gradient heading
+    border-radius: 6px 6px 0 0;
+  }
+
+  a {
+    background: #6b4ae2;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    transition: background 0.3s ease-in-out;
+
+    &:hover {
+      background: #380d53;
+    }
+  }
+
+  a.reset-style {
+    all: unset; /* Reset default link styles */
+    display: block;
+    text-decoration: none;
+
+  }
+
+  .calendar-day, day {
+    height: 80px;
+  }
+
+  .day {
+    overflow: hidden;
+    transition: background-color 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #b6b6b6 !important;
+    }
+  }
+
+  .today, .future {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .past {
+    opacity: 0.3;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  .today {
+    background-color: #FFFFC0 !important;
+  }
+}
+
+.event-item {
+  font-size: 12px;
+  padding: 3px 5px;
+  border-radius: 4px;
+  margin-top: 3px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.event-unfinished {
+  background-color: #dd2334;
+  margin-top: 3px;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .simple-calendar .calendar {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on tablets */
+  }
+
+  .calendar-day {
+    min-height: 80px; /* Adjust height for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .simple-calendar .calendar {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+  }
+
+  .calendar-day {
+    min-height: 60px; /* Adjust height for mobile */
+  }
+
+  .calendar-heading {
+    font-size: 16px; /* Adjust font size for mobile */
+    padding: 8px;
+  }
+
+  .date-number {
+    font-size: 12px; /* Adjust font size for mobile */
+  }
+
+  .event-item {
+    font-size: 10px; /* Adjust font size for mobile */
+    padding: 2px 4px;
+  }
+}
+
+.reposition {
+  padding-left: 0px;
+  padding-right: 12px;
+}
+
+.text-overflow {
+  flex-wrap: wrap;
+  display: flex;
+  text-wrap: auto;
+}

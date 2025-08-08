@@ -1,0 +1,19 @@
+<% if @tasks.any? %>
+  <% @tasks.each do |task| %>
+    <div class="task-info-modal text-start mx-3 mb-3 flex-shrink-0 font-small">
+      <div class="d-flex justify-content-between">
+        <strong class="text-overflow">
+          <%= task.title.capitalize %>
+        </strong>
+
+      </div>
+      <div class="text-overflow">
+        <em><%= task.event.title %></em>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <h1 class="text-center">
+    Hooray! No Tasks 🎉🥳🎉
+  </h1>
+<% end %>

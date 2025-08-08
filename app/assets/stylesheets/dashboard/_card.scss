@@ -1,0 +1,79 @@
+@mixin card-background($bg-color: #FADBFF) {
+  background-color: $bg-color;
+}
+
+.card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  // &:hover {
+  //   transform: translateY(-5px);
+  //   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.08);
+  // }
+}
+
+.new-event-card {
+  @include card-background(#D9D9D9);
+}
+
+.upcoming-card {
+  @include card-background;
+}
+
+.my-tasks-card {
+  @include card-background;
+}
+
+.event {
+  @include card-background(rgb(236, 209, 209));
+  text-align: center;
+  border-radius: 5px;
+  height: 250px;
+  width: 250px;
+}
+
+.date-header {
+  text-align: center;
+  background-color: #904949;
+  color: white;
+  border-radius: 5px;
+}
+
+.add-icon-size {
+  font-size: 100px;
+  color: white;
+}
+
+#event-form-container {
+  transition: max-height 0.3s ease;
+}
+
+.card.new-event-card.expanded {
+  max-height: 1000px; /* Adjust as needed */
+}
+
+.card.new-event-card.collapsed {
+  max-height: 150px; /* Adjust as needed */
+}
+
+.calendar-card {
+  width: 100%;
+  max-height: 350px;
+}
+.modal-title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: #904949;
+}
+
+.width-60{
+  width: 60%;
+}
+
+.width-40 {
+  width: 40%;
+}

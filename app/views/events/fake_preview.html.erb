@@ -1,0 +1,70 @@
+<div class="container-fluid py-4 px-4 preview-container" data-controller="preview-overflow">
+  <div class="text-center mb-4 preview-header">
+    <h1 class="fw-bold">Preview Event Plan</h1>
+    <h2><%= @event.title %></h2>
+    <p class="text-muted">
+      <i class="fa-solid fa-calendar-days"></i> <%= @event.date.strftime("%Y %B #{@event.date.day.ordinalize}") %> |
+      <i class="fa-regular fa-clock"></i> <%= @event.duration %> minutes
+    </p>
+  </div>
+
+  <h3 class="mb-3 activity-suggestions-title text-center w-100">Activity Suggestions:</h3>
+  <% if @generated_activities.present? %>
+    <%= form_with url: save_fake_event_plan_event_path(@event), method: :post, html: { class: "preview-activities-form" } do %>
+      <%= hidden_field_tag :event_id, @event.id %>
+      <%= hidden_field_tag :commit_action, "" %>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 activity-cards-container" data-preview-event-target="activity">
+        <% @generated_activities.each_with_index do |activity, index| %>
+          <div class="col" data-controller="user-dropdown">
+            <div class="card background-white shadow-sm border-0 h-100 activity-card">
+            <div class="position-relative mb-4">
+              <%= image_tag "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png", class: "avatar", data: {action: "click->user-dropdown#toggle", user_dropdown_target: "user" }  %>
+
+              <div class="position-absolute top-0 avatar_container" data-user-dropdown-target="avatars">
+                  <% @org_users.each do |org_user| %>
+                  <div class="d-flex flex-column gap-1">
+                    <%= image_tag (org_user&.photo&.attached? ? org_user.photo : "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png"), class: "avatar", data: {action: "click->user-dropdown#select", user_id: org_user.id} %>
+
+                    <p><%= org_user.first_name %></p>
+                  </div>
+                  <% end %>
+              </div>
+            </div>
+
+              <%= collection_select :activity, "#{index}", @org_users, :id, :first_name,
+                { prompt: "Assign Activity" },
+                { class: "form-select mb-2 invisible position-absolute background-white", data: { user_dropdown_target: "dropdown" } } %>
+              <%= render 'fake_activities', activity: activity, index: index %>
+              <div class="card-body">
+                <h5 class="fw-bold task-title">Tasks</h5>
+                <div class="task-container" data-preview-event-target="task" data-activity-title="<%= activity["title"] %>">
+                  <ul class="list-group list-group-flush task-list">
+                    <% if @tasks[activity["title"]].present? %>
+                      <% @tasks[activity["title"]].each do |task| %>
+                        <li class="list-group-item task-item background-white"><%= task %></li>
+                        <input type="hidden" name="activities[][tasks][]" value="<%= task %>">
+                      <% end %>
+                    <% else %>
+                      <li class="list-group-item text-muted">No tasks available for this activity.</li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="text-center mt-4 preview-actions">
+        <%= button_tag type: 'submit', class: 'btn btn-primary save-btn',
+            data: { preview_event_target: "saveButton", action: "submit->preview-event#submit", saving: "false" } do %>
+          <span class="button-text">Save Event Plan</span>
+          <i class="fa-solid fa-spinner fa-spin d-none loading-spinner"></i>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-center">No activities were generated. Please try again.</p>
+  <% end %>
+</div>

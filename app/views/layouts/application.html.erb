@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Eventerate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <%= favicon_link_tag asset_path('Eventerate_2.png')%>
+  </head>
+
+  <body data-current-user-id="<%= current_user&.id %>">
+    <%= render "shared/navbar" %>
+    <%= render "shared/flashes" %>
+    <div class="overarching-container d-flex flex-column flex-grow-1">
+      <%= yield %>
+    </div>
+    <%= render "shared/footer" %>
+  </body>
+</html>

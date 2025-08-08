@@ -1,0 +1,16 @@
+@import "card";
+@import "sidebar";
+@import "sidemenu";
+@import "event_card";
+@import "button";
+@import "event_list";
+@import "dates_list";
+@import "event_section";
+@import "task_section";
+@import "completion_circle";
+
+.add-event-h2 {
+  &:hover {
+    cursor: pointer;
+  }
+}

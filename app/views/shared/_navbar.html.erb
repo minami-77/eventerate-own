@@ -1,0 +1,51 @@
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container-fluid">
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag "Eventerate_2.png", alt: "Eventerate Logo", class: "navbar-logo" %>
+    <% end %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-6 mb-lg-0">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to chats_path, class: "nav-link" do %>
+              <i class="fa-solid fa-envelope fa-2x"></i>
+              <span class="hover-text">Messages</span>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to dashboard_index_path, class: "nav-link" do %>
+              <i class="fa-solid fa-table-columns fa-2x"></i>
+              <span class="hover-text">Dashboard</span>
+            <% end %>
+          </li>
+          <li class="nav-item dropdown">
+          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= image_tag (current_user&.photo.attached? ? current_user.photo : "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png"), class: "avatar", alt: "dropdown menu" %>
+            <span class="hover-text">Profile</span>
+          </a>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <%= link_to organizations_path, class: "dropdown-item" do %>
+                <i class="fas fa-users"></i> Organizations
+              <% end %>
+              <%= render "shared/change_profile_picture" %>
+              <%= link_to destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" do %>
+                <i class="fas fa-sign-out-alt"></i> Log out
+              <% end %>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to new_user_session_path, class: "nav-link" do %>
+              <i class="fas fa-sign-in-alt fa-lg"></i> Login
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

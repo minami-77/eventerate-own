@@ -1,0 +1,12 @@
+.alert {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.flash-fade-out {
+  transition: 1.3s;
+  opacity: 0;
+}
