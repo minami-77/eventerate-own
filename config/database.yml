@@ -78,7 +78,8 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: eventerate_production
-  username: eventerate
-  password: <%= ENV["EVENTERATE_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
+  # <<: *default
+  # database: eventerate_production
+  # username: eventerate
+  # password: <%= ENV["EVENTERATE_DATABASE_PASSWORD"] %>
